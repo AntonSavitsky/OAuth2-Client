@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns="http://www.springframework.org/schema/security"
+			 xmlns:beans="http://www.springframework.org/schema/beans"
+			 xmlns:oauth="http://www.springframework.org/schema/security/oauth2"
+			 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+			 xmlns:context="http://www.springframework.org/schema/context"
+			 xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd
+              http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-3.0.xsd
+              http://www.springframework.org/schema/security/oauth2 http://www.springframework.org/schema/security/spring-security-oauth2.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+	<!-- Root Context: defines shared resources visible to all other web components -->
+
+	<context:component-scan base-package="org.springsource.oauth" />
+
+	<beans:bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<beans:property name="locations">
+			<beans:list>
+				<beans:value>classpath:facebook.service.urls.properties</beans:value>
+			</beans:list>
+		</beans:property>
+	</beans:bean>
+
+		<http auto-config='true'>
+			<intercept-url pattern="/**" access="ROLE_USER" />
+		</http>
+
+		<authentication-manager>
+			<authentication-provider>
+				<user-service>
+					<user name="jimi" password="jimi" authorities="ROLE_USER" />
+				</user-service>
+			</authentication-provider>
+		</authentication-manager>
+
+	<!--apply the oauth client context -->
+
+	<oauth:client token-services-ref="oauth2TokenServices" />
+
+	<beans:bean id="oauth2TokenServices"
+		class="org.springframework.security.oauth2.consumer.token.InMemoryOAuth2ClientTokenServices" />
+
+	<oauth:resource id="facebook-service-access-details"
+					type="authorization_code"
+					clientId="530827513785334"
+					clientSecret="adb14ec1aca38c76a0ce8b8bb1149121"
+					accessTokenUri="https://graph.facebook.com/oauth/access_token"
+					userAuthorizationUri="https://www.facebook.com/dialog/oauth"
+					clientAuthenticationScheme="form"
+					bearerTokenName="oauth_token"
+					bearerTokenMethod="query"/>
+
+	 
+	 <beans:bean id="userInfoService" class="org.springsource.oauth.FacebookUserInfoServiceImpl"/>
+
+	<beans:bean name="facebookRestTemplate" class="org.springframework.security.oauth2.consumer.OAuth2RestTemplate">
+			<beans:constructor-arg ref="facebook-service-access-details"/>
+	</beans:bean>
+</beans:beans>
