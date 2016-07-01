@@ -36,6 +36,7 @@ public class FacebookInfoController {
 		return modelAndView;
 	}
 
+
 	@Autowired
 	public void setUserInfoService(FacebookUserInfoService userInfoService) {
 		this.userInfoService = userInfoService;

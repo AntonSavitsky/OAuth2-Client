@@ -7,6 +7,11 @@
 <body>
 <h1>
 	Hello from SimpleFacebookClient Application
+	<div style="position:absolute;top:0;right:0; margin: 0.3em;">
+		<a target="_blank" title="find us on Facebook" href="http://www.facebook.com/628891600595274">
+			<img alt="find us on facebook" src="//login.create.net/images/icons/user/facebook-b_130x50.png" border=0>
+		</a>
+	</div>
 </h1>
 
 <p>
