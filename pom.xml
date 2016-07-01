@@ -1,20 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+		 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
+		 http://maven.apache.org/maven-v4_0_0.xsd">
+
+<groupId>oauth</groupId>
 <modelVersion>4.0.0</modelVersion>
-<parent>
-	<groupId>org.springframework.security.oauth</groupId>
-	<artifactId>spring-security-oauth-parent</artifactId>
-	<version>1.0.0.M3</version>
-</parent>
 <artifactId>oauth</artifactId>
 <name>facebook_oauth2</name>
 <packaging>war</packaging>
 <version>1.0.0-BUILD-SNAPSHOT</version>
+
 <properties>
 	<java-version>1.8</java-version>
 	<org.springframework-version>4.3.0.RELEASE</org.springframework-version>
-	<org.springframework.roo-version>1.0.2.RELEASE</org.springframework.roo-version>
 	<org.aspectj-version>1.8.7</org.aspectj-version>
 	<org.slf4j-version>1.5.10</org.slf4j-version>
 </properties>
@@ -24,17 +23,10 @@
 		<groupId>org.springframework</groupId>
 		<artifactId>spring-context</artifactId>
 		<version>${org.springframework-version}</version>
-		<exclusions>
-			<!-- Exclude Commons Logging in favor of SLF4j -->
-			<exclusion>
-				<groupId>commons-logging</groupId>
-				<artifactId>commons-logging</artifactId>
-			</exclusion>
-		</exclusions>
 	</dependency>
 
 	<dependency>
-		<groupId>${project.groupId}</groupId>
+		<groupId>org.springframework.security.oauth</groupId>
 		<artifactId>spring-security-oauth</artifactId>
 		<version>1.0.0.M3</version>
 	</dependency>
@@ -43,13 +35,6 @@
 		<groupId>org.springframework</groupId>
 		<artifactId>spring-webmvc</artifactId>
 		<version>${org.springframework-version}</version>
-	</dependency>
-	<!-- Roo dependencies -->
-	<dependency>
-		<groupId>org.springframework.roo</groupId>
-		<artifactId>org.springframework.roo.annotations</artifactId>
-		<version>${org.springframework.roo-version}</version>
-		<scope>provided</scope>
 	</dependency>
 
 	<!-- AspectJ -->
@@ -77,36 +62,12 @@
 		<version>${org.slf4j-version}</version>
 		<scope>runtime</scope>
 	</dependency>
+
 	<dependency>
 		<groupId>log4j</groupId>
 		<artifactId>log4j</artifactId>
-		<version>1.2.15</version>
-		<exclusions>
-			<exclusion>
-				<groupId>javax.mail</groupId>
-				<artifactId>mail</artifactId>
-			</exclusion>
-			<exclusion>
-				<groupId>javax.jms</groupId>
-				<artifactId>jms</artifactId>
-			</exclusion>
-			<exclusion>
-				<groupId>com.sun.jdmk</groupId>
-				<artifactId>jmxtools</artifactId>
-			</exclusion>
-			<exclusion>
-				<groupId>com.sun.jmx</groupId>
-				<artifactId>jmxri</artifactId>
-			</exclusion>
-		</exclusions>
+		<version>1.2.17</version>
 		<scope>runtime</scope>
-	</dependency>
-
-	<!-- @Inject -->
-	<dependency>
-		<groupId>javax.inject</groupId>
-		<artifactId>javax.inject</artifactId>
-		<version>1</version>
 	</dependency>
 
 	<!-- Servlet -->
@@ -160,29 +121,6 @@
 		<version>4.1.0.RELEASE</version>
 	</dependency>
 </dependencies>
-<repositories>
-	<!-- For testing against latest Spring snapshots -->
-	<repository>
-		<id>org.springframework.maven.snapshot</id>
-		<name>Spring Maven Snapshot Repository</name>
-		<url>http://maven.springframework.org/snapshot</url>
-		<releases>
-			<enabled>false</enabled>
-		</releases>
-		<snapshots>
-			<enabled>true</enabled>
-		</snapshots>
-	</repository>
-	<!-- For developing against latest Spring milestones -->
-	<repository>
-		<id>org.springframework.maven.milestone</id>
-		<name>Spring Maven Milestone Repository</name>
-		<url>http://maven.springframework.org/milestone</url>
-		<snapshots>
-			<enabled>false</enabled>
-		</snapshots>
-	</repository>
-</repositories>
 <build>
 	<plugins>
 		<plugin>
@@ -191,14 +129,6 @@
 			<configuration>
 				<source>${java-version}</source>
 				<target>${java-version}</target>
-			</configuration>
-		</plugin>
-		<plugin>
-			<groupId>org.codehaus.mojo</groupId>
-			<artifactId>tomcat-maven-plugin</artifactId>
-			<version>1.0-beta-1</version>
-			<configuration>
-				<port>8002</port>
 			</configuration>
 		</plugin>
 		<plugin>
@@ -211,13 +141,6 @@
 						<port>8888</port>
 					</connector>
 				</connectors>
-			</configuration>
-		</plugin>
-		<plugin>
-			<!--skip deploy (this is just a test module) -->
-			<artifactId>maven-deploy-plugin</artifactId>
-			<configuration>
-				<skip>true</skip>
 			</configuration>
 		</plugin>
 	</plugins>

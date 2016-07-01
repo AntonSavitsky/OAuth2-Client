@@ -9,7 +9,6 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.security.oauth2.common.json.JSONException;
 import org.springframework.security.oauth2.consumer.OAuth2RestTemplate;
 import org.springframework.security.oauth2.consumer.token.OAuth2ClientTokenServices;
 import org.springframework.stereotype.Service;
