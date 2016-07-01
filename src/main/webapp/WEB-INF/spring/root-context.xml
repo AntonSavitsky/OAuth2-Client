@@ -4,8 +4,8 @@
 			 xmlns:oauth="http://www.springframework.org/schema/security/oauth2"
 			 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 			 xmlns:context="http://www.springframework.org/schema/context"
-			 xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd
-              http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-3.0.xsd
+			 xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+              http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security.xsd
               http://www.springframework.org/schema/security/oauth2 http://www.springframework.org/schema/security/spring-security-oauth2.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
 
 	<!-- Root Context: defines shared resources visible to all other web components -->
@@ -55,4 +55,10 @@
 	<beans:bean name="facebookRestTemplate" class="org.springframework.security.oauth2.consumer.OAuth2RestTemplate">
 			<beans:constructor-arg ref="facebook-service-access-details"/>
 	</beans:bean>
+
+	<beans:bean id="jsonConverter" class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
+		<beans:property name="supportedMediaTypes" value="application/json" />
+		<beans:property name="prettyPrint" value="true" />
+	</beans:bean>
+
 </beans:beans>

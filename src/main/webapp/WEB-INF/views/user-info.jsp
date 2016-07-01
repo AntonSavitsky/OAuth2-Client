@@ -1,11 +1,6 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+         pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%--
-  Created by IntelliJ IDEA.
-  User: asavitsky
-  Date: 6/30/16
-  Time: 1:41 PM
-  To change this template use File | Settings | File Templates.
---%>
 <html>
 <head>
     <title>Facebook Access App</title>
@@ -21,10 +16,18 @@
 </h1>
 
 <p>
-    <div style="height: 200px; width: 200px;"><img src="http://graph.facebook.com/<c:out value="${userId}"></c:out>/picture?type=large"></div><br/>
-    <b>User name:</b> <c:out value="${userName}"></c:out><br/>
-    <b>User id:</b> <c:out value="${userId}"></c:out>
+    <div style="height: 200px; width: 200px;"><img src="http://graph.facebook.com/<c:out value="${user.id}"></c:out>/picture?type=large"></div><br/>
+    <b>User name:</b> <c:out value="${user.name}"></c:out><br/>
+    <b>User id:</b> <c:out value="${user.id}"></c:out><br/><br/>
 
+    Permissions granted to app:<br/>
+    <ul>
+        <c:forEach var="permission" items="${permissions}">
+            <c:if test="${permission.status == 'granted'}">
+                <li><i>${permission.name}</i></li>
+            </c:if>
+        </c:forEach>
+    </ul>
 </p>
 </body>
 </html>

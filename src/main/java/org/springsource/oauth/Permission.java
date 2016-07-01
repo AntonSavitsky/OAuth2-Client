@@ -15,6 +15,8 @@ public class Permission {
         this.status = status;
     }
 
+    public Permission(){}
+
     public String getName() {
         return name;
     }

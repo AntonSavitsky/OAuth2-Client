@@ -17,22 +17,12 @@ public class FacebookInfoController {
 	private FacebookUserInfoService userInfoService;
 	
 	@RequestMapping(value="/user")
-	public ModelAndView getCV() {
+	public ModelAndView getUserInfo() {
 		User userInfo = userInfoService.getUserInfo();
-		System.out.println(userInfo);
-		Map<String, String> params = new HashMap<String, String>();
-		params.put("userName", userInfo.getName());
-		params.put("userId", userInfo.getId());
-		ModelAndView modelAndView = new ModelAndView("user-info", params);
-
 
 		List<Permission> list=userInfoService.getPermissions();
-		System.out.println("permissions:");
-		Iterator iterator=list.iterator();
-		while(iterator.hasNext()) {
-			Permission permission = (Permission) iterator.next();
-			System.out.println("name: " + permission.getName() + "|" + "status: " + permission.getStatus());
-		}
+		ModelAndView modelAndView=new ModelAndView("user-info","user", userInfo);
+		modelAndView.addObject("permissions", list);
 		return modelAndView;
 	}
 

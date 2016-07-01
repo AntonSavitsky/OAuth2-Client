@@ -29,33 +29,21 @@ public class FacebookUserInfoServiceImpl implements FacebookUserInfoService {
 
 	@Override
 	public User getUserInfo() {
-		String content = facebookRestTemplate.getForObject(URI.create(userInfoUrl), String.class);
-		System.out.println(content);
-		JSONObject obj=null;
-		User user=null;
-			obj=new JSONObject(content);
-			user=new User(obj.getString("id"), obj.getString("name"));
-		return user;
+		return facebookRestTemplate.getForObject(URI.create(userInfoUrl), User.class);
 	}
 
 	@Override
 	public List<Permission> getPermissions(){
-
 		String permissions=facebookRestTemplate.getForObject(URI.create(permissionsUrl), String.class);
-		System.out.println(permissions);
 		List<Permission> permissionsList=new ArrayList<>();
-
 
 		JSONArray arrayOfPermissions= (new JSONObject(permissions)).getJSONArray("data");
 
-		Iterator iterator=arrayOfPermissions.iterator();
-
-		while(iterator.hasNext()) {
-			JSONObject jsonObj=(JSONObject) iterator.next();
-			Permission permission=new Permission(
+		for (Object permissionObj : arrayOfPermissions) {
+			JSONObject jsonObj = (JSONObject) permissionObj;
+			Permission permission = new Permission(
 					jsonObj.getString("permission"),
 					jsonObj.getEnum(Status.class, "status"));
-
 			permissionsList.add(permission);
 		}
 		return permissionsList;
